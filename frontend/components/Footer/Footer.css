@@ -1,0 +1,14 @@
+
+.subfooter{
+    background-color: #b9cde4;
+}
+.subfooter-container{
+    gap: 50px;
+    justify-content: center;
+    padding: 15px var(--padding-inline-section) 15px;
+    flex-wrap: wrap;
+
+}
+.hover-links img{
+    height: 20px;
+}

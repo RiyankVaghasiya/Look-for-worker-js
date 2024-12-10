@@ -1,0 +1,151 @@
+/* Card Shadows & Hover Effects */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* .card:hover { */
+/* transform: translateY(-5px); */
+/* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+
+*/
+/* } */
+
+/* Stat Card Styles */
+.stat-card {
+  background-color: #e3f2fd;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  /* transition: transform 0.3s ease, background-color 0.3s ease; */
+}
+
+.stat-card:hover {
+  transform: translateY(-1px);
+  background-color: #bbdefb;
+}
+
+/* Modal Styles */
+.user-profile-modal-dialog {
+  max-width: 500px;
+}
+
+.user-profile-modal-content {
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.user-modal-header {
+  background-color: #007bff;
+  color: white;
+}
+
+.user-profile-modal-footer button {
+  border-radius: 5px;
+}
+
+/* Counter Styles */
+.counter {
+  font-size: 2.5rem;
+  color: #1976d2;
+  font-weight: bold;
+  transition: all 0.4s ease;
+}
+
+/* Table Styles */
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f8f9fa;
+}
+
+.hiring-history-table {
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hiring-history-table thead {
+  background-color: #007bff;
+  color: white;
+  border-radius: 10px;
+}
+
+.hiring-history-table th,
+.hiring-history-table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.hiring-history-table tr:hover {
+  background-color: #f1f1f1;
+  /* transform: scale(1.02); */
+}
+
+.hiring-history-table .badge {
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.hiring-history-table .badge-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.hiring-history-table .badge-warning {
+  background-color: #ffc107;
+  color: white;
+}
+
+.hiring-history-table td {
+  padding: 1.2rem;
+}
+
+.hiring-history-table td span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hiring-history-table td span .react-icons {
+  margin-right: 0.5rem;
+}
+
+
+/* extra css for design */
+.color {
+  background-color: #ff9502;
+  color: white;
+}
+
+.color:hover {
+  background-color: #ff9502;
+  color: white;
+}
+
+/* span {
+  color: #ff9502;
+} */
+
+/* css to remove */
+.primary-btn {
+  background-color: #f5940d;
+  border-radius: 6px;
+  font-weight: 500;
+  padding: 10px 24px;
+  color: white !important;
+  box-shadow: 0 0 2px var(--secondary-text-color);
+  text-align: center;
+  border: none;
+  text-decoration: none;
+}
+
+.primary-btn:hover {
+  background-color: #cf711f;
+  transition: 0.2s ease-out;
+}
+
+.userProfile-header {
+  padding-top: 10px;
+}

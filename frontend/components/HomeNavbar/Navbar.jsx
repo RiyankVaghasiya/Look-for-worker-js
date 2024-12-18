@@ -35,7 +35,7 @@ function Navbar({ registrationFormRef }) {
   // Validate session on page load
   useEffect(() => {
     const checkAuthStatus = () => {
-      const token = Cookies.get('accessToken');
+      const token = Cookies.get('UseraccessToken');
       // console.log("this is navbar", token)
 
       if (token) {

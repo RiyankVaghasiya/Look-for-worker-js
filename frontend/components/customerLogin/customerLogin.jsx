@@ -49,9 +49,9 @@ const LoginPopup = ({ toggleForm, onLoginSuccess }) => {
       if (response.status === 200) {
         console.log('Login successful:', response.data);
 
-        const token = response.data.data.accessToken;
+        const token = response.data.data.UseraccessToken;
         // console.log("loginpopup", token)
-        Cookies.set('accessToken', token, { expires: 7, path: '/', sameSite: 'Lax', secure: false });
+        Cookies.set('UseraccessToken', token, { expires: 7, path: '/', sameSite: 'Lax', secure: false });
         // console.log('Token stored in cookie loginpopup:', Cookies.get('accessToken'));
 
         onLoginSuccess?.(token); //my change

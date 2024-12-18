@@ -12,12 +12,12 @@ import mongoose from "mongoose";
 const generateAccessAndRefreshTokens = async (workerId) => {
   try {
     const worker = await Worker.findById(workerId);
-    const accessToken = worker.generateAccessToken();
-    const refreshToken = worker.generateRefreshToken();
-    worker.refreshToken = refreshToken;
+    const WorkeraccessToken = worker.generateAccessToken();
+    const WorkerrefreshToken = worker.generateRefreshToken();
+    worker.WorkerrefreshToken = WorkerrefreshToken;
     await worker.save({ validateBeforeSave: false });
 
-    return { accessToken, refreshToken };
+    return { WorkeraccessToken, WorkerrefreshToken };
   } catch (error) {
     throw new ApiError(
       500,
@@ -143,12 +143,11 @@ const loginWorker = asyncHandler(async (req, res) => {
   }
 
   //if user exist then generate access and refresh token
-  const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
-    worker._id
-  );
+  const { WorkeraccessToken, WorkerrefreshToken } =
+    await generateAccessAndRefreshTokens(worker._id);
 
   const loggedInWorker = await Worker.findById(worker._id).select(
-    "-password -refreshToken"
+    "-password -WorkerrefreshToken"
   );
 
   //send cookie
@@ -160,15 +159,15 @@ const loginWorker = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .cookie("accessToken", accessToken, options)
-    .cookie("refreshToken", refreshToken, options)
+    .cookie("WorkeraccessToken", WorkeraccessToken, options)
+    .cookie("WorkerrefreshToken", WorkerrefreshToken, options)
     .json(
       new ApiResponse(
         200,
         {
           worker: loggedInWorker,
-          accessToken,
-          refreshToken,
+          WorkeraccessToken,
+          WorkerrefreshToken,
         },
         "Worker logged In Successfully"
       )
@@ -198,7 +197,7 @@ const logoutWorker = asyncHandler(async (req, res) => {
     req.worker.id,
     {
       $unset: {
-        refreshToken: 1,
+        WorkerrefreshToken: 1,
       },
     },
     {
@@ -212,13 +211,13 @@ const logoutWorker = asyncHandler(async (req, res) => {
   };
   return res
     .status(200)
-    .clearCookie("accessToken", options)
-    .clearCookie("refreshToken", options)
+    .clearCookie("WorkeraccessToken", options)
+    .clearCookie("WorkerrefreshToken", options)
     .json(new ApiResponse(200, {}, "Worker logged Out"));
 });
 
 const isloggedIn = asyncHandler(async (req, res) => {
-  const token = req.cookies.accessToken;
+  const token = req.cookies.WorkeraccessToken;
   if (!token) {
     return res.status(401).json({ loggedIn: false });
   }
@@ -290,7 +289,9 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
     httpOnly: true,
     secure: true,
   };
-  res.clearCookie("accessToken", options).clearCookie("refreshToken", options);
+  res
+    .clearCookie("WorkeraccessToken", options)
+    .clearCookie("WorkerrefreshToken", options);
 
   return res
     .status(200)

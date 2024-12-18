@@ -9,7 +9,7 @@ import { User } from "../models/user.model.js";
 const verifyJWT = asyncHandler(async (req, res, next) => {
   try {
     const token =
-      req.cookies?.accessToken ||
+      req.cookies?.UseraccessToken ||
       req.header("Authorization")?.replace("Bearer", "");
 
     if (!token) {
@@ -18,7 +18,7 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
     const user = await User.findById(decodedToken?._id).select(
-      "-password -refreshToken"
+      "-password -UserrefreshToken"
     );
     if (!user) {
       throw new ApiError(401, "Invalid access Token");
@@ -33,7 +33,7 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
 const verifyWorker = asyncHandler(async (req, res, next) => {
   try {
     const token =
-      req.cookies?.accessToken ||
+      req.cookies?.WorkeraccessToken ||
       req.header("Authorization")?.replace("Bearer", "");
 
     if (!token) {
@@ -42,7 +42,7 @@ const verifyWorker = asyncHandler(async (req, res, next) => {
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
     const worker = await Worker.findById(decodedToken?._id).select(
-      "-password -refreshToken"
+      "-password -WorkerrefreshToken"
     );
     if (!worker) {
       throw new ApiError(401, "Invalid access Token");

@@ -8,12 +8,12 @@ import mongoose from "mongoose";
 const generateAccessAndRefreshTokens = async (userId) => {
   try {
     const user = await User.findById(userId);
-    const accessToken = user.generateAccessToken();
-    const refreshToken = user.generateRefreshToken();
-    user.refreshToken = refreshToken;
+    const UseraccessToken = user.generateAccessToken();
+    const UserrefreshToken = user.generateRefreshToken();
+    user.UserrefreshToken = UserrefreshToken;
     await user.save({ validateBeforeSave: false });
 
-    return { accessToken, refreshToken };
+    return { UseraccessToken, UserrefreshToken };
   } catch (error) {
     throw new ApiError(
       500,
@@ -102,12 +102,11 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 
   //if user exist then generate access and refresh token
-  const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
-    user._id
-  );
+  const { UseraccessToken, UserrefreshToken } =
+    await generateAccessAndRefreshTokens(user._id);
 
   const loggedInUser = await User.findById(user._id).select(
-    "-password -refreshToken"
+    "-password -UserrefreshToken"
   );
 
   //send cookie
@@ -118,15 +117,15 @@ const loginUser = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .cookie("accessToken", accessToken, options)
-    .cookie("refreshToken", refreshToken, options)
+    .cookie("UseraccessToken", UseraccessToken, options)
+    .cookie("UserrefreshToken", UserrefreshToken, options)
     .json(
       new ApiResponse(
         200,
         {
           user: loggedInUser,
-          accessToken,
-          refreshToken,
+          UseraccessToken,
+          UserrefreshToken,
         },
         "User logged In Successfully"
       )
@@ -138,7 +137,7 @@ const logoutUser = asyncHandler(async (req, res) => {
     req.user._id,
     {
       $unset: {
-        refreshToken: 1,
+        UserrefreshToken: 1,
       },
     },
     {
@@ -151,8 +150,8 @@ const logoutUser = asyncHandler(async (req, res) => {
   };
   return res
     .status(200)
-    .clearCookie("accessToken", options)
-    .clearCookie("refreshToken", options)
+    .clearCookie("UseraccessToken", options)
+    .clearCookie("UserrefreshToken", options)
     .json(new ApiResponse(200, {}, "User logged Out"));
 });
 

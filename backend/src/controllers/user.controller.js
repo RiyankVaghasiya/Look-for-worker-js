@@ -192,4 +192,41 @@ const editUserData = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, user, "Account details updated successfully"));
 });
-export { registerUser, loginUser, logoutUser, getUserData, editUserData };
+
+const isUserloggedIn = asyncHandler(async (req, res) => {
+  const token = req.cookies.UseraccessToken;
+  if (!token) {
+    return res.status(401).json({ loggedIn: false });
+  }
+  try {
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    res.status(200).json({ loggedIn: true, user: decoded });
+  } catch (error) {
+    res.status(401).json({ loggedIn: false });
+  }
+});
+
+const fetchUserHiringHistory = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user?._id)
+    .populate({
+      path: "hiringHistory.worker",
+      select: "firstName lastName",
+    })
+    .select("-password");
+  const history = user.hiringHistory;
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(200, history, "history details fetched successfully")
+    );
+});
+export {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getUserData,
+  editUserData,
+  isUserloggedIn,
+  fetchUserHiringHistory,
+};

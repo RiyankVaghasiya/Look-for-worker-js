@@ -204,17 +204,19 @@ const RegisterPopup = ({ toggleForm }) => {
                     </div>
                 </div>
 
-                <div className="small-bold-text flex conditions" style={{ gap: '5px' }}>
-                    <input
-                        type="checkbox"
-                        name="new-account-condition"
-                        id="new-account-condition"
-                        checked={acceptTerms}
-                        onChange={(e) => setAcceptTerms(e.target.checked)}
-                    />
-                    <label htmlFor="new-account-condition" style={{ cursor: 'pointer' }}>
-                        I accept terms and conditions of look for worker
-                    </label>
+                <div className="small-bold-text conditions" style={{ gap: '5px' }}>
+                    <div className="condition-flex flex" style={{ gap: '10px' }}>
+                        <input
+                            type="checkbox"
+                            name="new-account-condition"
+                            id="new-account-condition"
+                            checked={acceptTerms}
+                            onChange={(e) => setAcceptTerms(e.target.checked)}
+                        />
+                        <label htmlFor="new-account-condition" style={{ cursor: 'pointer' }}>
+                            I accept terms and conditions of look for worker
+                        </label>
+                    </div>
                     {fieldErrors.terms && <p className="customer-register-error">{fieldErrors.terms}</p>}
                 </div>
 

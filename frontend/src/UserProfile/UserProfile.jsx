@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import '../UserProfile/UserProfile.css';
 import { FaCheckCircle, FaHourglassHalf } from 'react-icons/fa';
 import axios from 'axios';
@@ -85,7 +86,7 @@ function UserProfile() {
       );
 
       setUserDetails((prevDetails) => ({ ...prevDetails, ...editDetails }));
-      setShowModal(false);
+      window.location.reload();
     } catch (error) {
       console.error('Error updating profile:', error);
       alert('Failed to update profile');
@@ -109,33 +110,34 @@ function UserProfile() {
           <div className="card shadow-lg p-4">
             <h3 className="text-center mb-4">Personal Details</h3>
 
-            <div className="mb-3 d-flex align-items-center">
-              <i className="fas fa-user-circle me-3" style={{ fontSize: '2rem', color: '#007bff' }}></i>
+            <div className=" d-flex align-items-center list-group-item">
+              <i className="fa-solid fa-user editProfileIcons"></i>
               <p><strong>Name:</strong> {userDetails.fullName}</p>
             </div>
 
-            <div className="mb-3 d-flex align-items-center">
-              <i className="fas fa-map-marker-alt me-3" style={{ fontSize: '1.5rem', color: '#28a745' }}></i>
+            <div className="d-flex align-items-center list-group-item">
+              <i className="fa-solid fa-location-dot editProfileIcons"></i>
               <p><strong>Address:</strong> {userDetails.address}</p>
             </div>
 
-
-
-            <div className="mb-3 d-flex align-items-center">
-              <i className="fas fa-envelope me-3" style={{ fontSize: '1.5rem', color: '#f39c12' }}></i>
+            <div className="d-flex align-items-center list-group-item">
+              <i className="fas fa-envelope editProfileIcons" ></i>
               <p><strong>Email:</strong> {userDetails.email}</p>
             </div>
 
-            <div className="mb-3 d-flex align-items-center">
-              <i className="fas fa-phone-alt me-3" style={{ fontSize: '1.5rem', color: '#e74c3c' }}></i>
+            <div className="d-flex align-items-center list-group-item">
+              <i className="fas fa-phone-alt editProfileIcons"></i>
               <p><strong>Phone:</strong> {userDetails.phone}</p>
             </div>
 
             <button
-              className="btn w-100 mt-4 primary-btn"
+              className="btn w-100 mt-4 primary-btn editProfileBtn"
+              data-bs-toggle="modal"
+              data-bs-target="#authModal"
               onClick={() => {
                 handleEditClick();
                 setShowModal(true);
+
               }}
             >
               <i className="fas fa-edit me-2"></i> Edit Profile
@@ -226,69 +228,70 @@ function UserProfile() {
         </table>
       </div>
 
-      {showModal && (
-        <div className="modal show" tabIndex="-1" style={{ display: 'block' }}>
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Edit Profile</h5>
-                <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
+      <div className="modal fade"
+        id='authModal' aria-labelledby="authModalLabel" aria-hidden="true" data-bs-backdrop="static"
+        data-bs-keyboard="false" tabIndex="-1">
+        <div className="modal-dialog" >
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Edit Profile</h5>
+              <button type="button" className="btn-close" data-bs-dismiss="modal"
+                aria-label="Close" onClick={() => setShowModal(false)}></button>
+            </div>
+            <div className="modal-body">
+              <div className="mb-3">
+                <label htmlFor="name" className="form-label">Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="name"
+                  name="fullName"
+                  value={editDetails.fullName}
+                  onChange={handleChange}
+                />
               </div>
-              <div className="modal-body">
-                <div className="mb-3">
-                  <label htmlFor="name" className="form-label">Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="name"
-                    name="fullName"
-                    value={editDetails.fullName}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="address" className="form-label">Address</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="address"
-                    name="address"
-                    value={editDetails.address}
-                    onChange={handleChange}
-                  />
-                </div>
+              <div className="mb-3">
+                <label htmlFor="address" className="form-label">Address</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="address"
+                  name="address"
+                  value={editDetails.address}
+                  onChange={handleChange}
+                />
+              </div>
 
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    name="email"
-                    value={editDetails.email}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="phone" className="form-label">Phone</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="phone"
-                    name="phone"
-                    value={editDetails.phone}
-                    onChange={handleChange}
-                  />
-                </div>
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  value={editDetails.email}
+                  onChange={handleChange}
+                />
               </div>
-              <div className="modal-footer">
-                {/* <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Close</button> */}
-                <button type="button" className="btn btn-primary" onClick={handleUpdateProfile} disabled={updateLoading}>{updateLoading ? 'Saving...' : 'Save changes'}</button>
+              <div className="mb-3">
+                <label htmlFor="phone" className="form-label">Phone</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="phone"
+                  name="phone"
+                  value={editDetails.phone}
+                  onChange={handleChange}
+                />
               </div>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-primary" onClick={handleUpdateProfile} disabled={updateLoading}>{updateLoading ? 'Saving...' : 'Save changes'}</button>
             </div>
           </div>
         </div>
-      )}
+      </div>
+
     </div>
   );
 }

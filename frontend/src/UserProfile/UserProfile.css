@@ -149,3 +149,14 @@
 .userProfile-header {
   padding-top: 10px;
 }
+
+.editProfileBtn:active {
+  background-color: #f5940d !important;
+}
+
+.editProfileIcons {
+  color: #ff9502;
+  font-size: 20px;
+  padding-right: 10px;
+  margin-bottom: 13px;
+}

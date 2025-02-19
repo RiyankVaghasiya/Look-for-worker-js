@@ -24,6 +24,16 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "password is required"],
     },
+    hiringHistory: [
+      {
+        worker: { type: mongoose.Schema.Types.ObjectId, ref: "Worker" },
+        status: {
+          type: String,
+          enum: ["pending", "completed", "rejected"],
+          default: "pending",
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

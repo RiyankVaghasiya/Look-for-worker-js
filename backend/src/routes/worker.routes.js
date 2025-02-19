@@ -11,6 +11,9 @@ import {
   // refreshAccessToken,
   registerWorker,
   isloggedIn,
+  fetchRequests,
+  getWorkers,
+  getWorkerDetailsById,
   // updateUserAvatar,
   // updateUserCoverImage,
 } from "../controllers/worker.controller.js";
@@ -29,6 +32,9 @@ workerRouter.route("/editWorkerInfo").post(verifyWorker, editWorkerDetails);
 workerRouter
   .route("/editworkerCredentials")
   .post(verifyWorker, changeCurrentPassword);
+workerRouter.route("/fetchRequest").get(verifyWorker, fetchRequests);
+workerRouter.route("/getWorkers").get(getWorkers);
+workerRouter.route("/:id").get(getWorkerDetailsById);
 
 //secured routes
 // router.route("/refresh-token").post(refreshAccessToken);

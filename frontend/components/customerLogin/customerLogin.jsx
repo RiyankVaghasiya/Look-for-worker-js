@@ -30,6 +30,11 @@ const LoginPopup = ({ toggleForm, onLoginSuccess }) => {
       errors.email = 'Invalid email format';
       isValid = false;
     }
+    //password validation
+    if (!loginPassword.trim()) {
+      errors.password = 'Password is required';
+      isValid = false;
+    }
 
     if (!acceptTerms) {
       errors.terms = 'You must accept the terms and conditions';
@@ -111,22 +116,25 @@ const LoginPopup = ({ toggleForm, onLoginSuccess }) => {
         </div>
 
         {/* Terms and Conditions */}
-        <div className="small-bold-text flex conditions" style={{ gap: '10px' }}>
-          <input
-            type="checkbox"
-            name="conditions"
-            id="conditions"
-            checked={acceptTerms}
-            onChange={(e) => setAcceptTerms(e.target.checked)}
-          />
-          <label htmlFor="conditions" style={{ cursor: 'pointer' }}>
-            I accept terms and conditions of look for worker
-          </label>
-          {errorMessages.terms && <p className="customer-register-error">{errorMessages.terms}</p>}
+        <div className="small-bold-text conditions" >
+          <div className="condition-flex flex" style={{ gap: '10px' }}>
+            <input
+              type="checkbox"
+              name="conditions"
+              id="conditions"
+              checked={acceptTerms}
+              onChange={(e) => setAcceptTerms(e.target.checked)}
+            />
+
+            <label htmlFor="conditions" style={{ cursor: 'pointer' }}>
+              I accept terms and conditions of look for worker
+            </label>
+          </div>
+          {errorMessages.terms && <p className="customer-register-error login-condition-error">{errorMessages.terms}</p>}
         </div>
 
         {/* Submit Button */}
-        <button className="primary-btn login-btn" onClick={handleLogin} style={{ marginTop: '15px' }}>
+        <button className="primary-btn login-btn" onClick={handleLogin} style={{ marginTop: '10px' }}>
           Proceed
         </button>
       </div>

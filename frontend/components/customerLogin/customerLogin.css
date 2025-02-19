@@ -7,7 +7,7 @@
 
 .customer-register-error general-error {
     color: red;
-    font-size: 15px;
+    font-size: 17px;
     margin: 0;
 }
 
@@ -71,4 +71,8 @@
 .create-new-acc {
     text-decoration: none;
     width: 70%;
+}
+
+.flex-direction {
+    flex-direction: column;
 }

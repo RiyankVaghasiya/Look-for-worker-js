@@ -304,6 +304,53 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
     );
 });
 
+const fetchRequests = asyncHandler(async (req, res) => {
+  const worker = await Worker.findById(req.worker?._id)
+    .populate({
+      path: "requests.user",
+      select: "fullName email",
+    })
+    .select("-password");
+
+  const requests = worker.requests;
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, requests, "requests fetched successfully"));
+});
+
+const getWorkers = asyncHandler(async (req, res) => {
+  const worker = await Worker.find();
+
+  return res.status(200).json(
+    new ApiResponse(
+      200,
+      {
+        worker: worker,
+      },
+      "Worker fetched Successfully"
+    )
+  );
+});
+
+const getWorkerDetailsById = asyncHandler(async (req, res) => {
+  // get user data from frontend
+
+  const worker = await Worker.findById(req.params.id);
+  // const worker = await Worker.findById(req.body.id);
+  if (!worker) {
+    throw new ApiError(404, "worker does not exist with this email");
+  }
+  return res.status(200).json(
+    new ApiResponse(
+      200,
+      {
+        worker: worker,
+      },
+      "Worker fetched Successfully"
+    )
+  );
+});
 // //when accesstoken expires frontend makes api request to create new accesstoken
 // const refreshAccessToken = asyncHandler(async (req, res) => {
 //   // first extract the refreshtoken of user from cookies
@@ -542,6 +589,9 @@ export {
   isloggedIn,
   editWorkerDetails,
   changeCurrentPassword,
+  fetchRequests,
+  getWorkers,
+  getWorkerDetailsById,
   // refreshAccessToken,
   // getCurrentUser,
   // updateUserAvatar,

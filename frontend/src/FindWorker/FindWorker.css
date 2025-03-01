@@ -237,6 +237,7 @@
 
 .col-5 {
   padding-block: 15px;
+  width: 37.666667%
 }
 
 .small {
@@ -252,4 +253,18 @@
   padding: 0.45rem 0.5rem;
   font-size: 0.875rem;
   border-radius: 0.25rem;
+}
+
+ul.mb-0.fa-ul.text-muted {
+  display: flex;
+  gap: 41px;
+  margin-top: 5px;
+}
+
+.lead {
+  font-size: 20px;
+}
+
+.fa-lg {
+  font-size: 1.35em !important;
 }

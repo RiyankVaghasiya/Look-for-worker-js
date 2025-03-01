@@ -210,7 +210,7 @@ const fetchUserHiringHistory = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user?._id)
     .populate({
       path: "hiringHistory.worker",
-      select: "firstName lastName",
+      select: "firstName lastName category subCategory",
     })
     .select("-password");
   const history = user.hiringHistory;
@@ -221,6 +221,7 @@ const fetchUserHiringHistory = asyncHandler(async (req, res) => {
       new ApiResponse(200, history, "history details fetched successfully")
     );
 });
+
 export {
   registerUser,
   loginUser,

@@ -392,7 +392,7 @@ export const RegistrationForm = ({ formRef }) => {
               <input
                 type="text"
                 class="third-row-select-box"
-                placeholder="In months"
+                placeholder="In years"
                 name="workExperience"
                 value={formData.workExperience}
                 onChange={handleChange}
@@ -417,7 +417,7 @@ export const RegistrationForm = ({ formRef }) => {
                 onChange={handleChange} required>
                 <option value="city">Select city</option>
                 <option value="surat">Surat</option>
-                <option value="ahemdabad">Ahemdabad</option>
+                <option value="ahmedabad">Ahmedabad</option>
                 <option value="vadodara">Vadodara</option>
                 <option value="bhavnagar">Bhavnagar</option>
                 <option value="rajkot">Rajkot</option>

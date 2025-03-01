@@ -29,8 +29,12 @@ const UserSchema = new mongoose.Schema(
         worker: { type: mongoose.Schema.Types.ObjectId, ref: "Worker" },
         status: {
           type: String,
-          enum: ["pending", "completed", "rejected"],
+          enum: ["pending", "accepted", "rejected"],
           default: "pending",
+        },
+        requestDate: {
+          type: Date,
+          default: () => new Date().setHours(0, 0, 0, 0), // Stores only the date
         },
       },
     ],

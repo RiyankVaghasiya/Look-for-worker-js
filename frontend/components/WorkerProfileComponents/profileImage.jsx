@@ -34,7 +34,7 @@ const ProfileImage = ({ }) => {
         <h4 className="profile-username text-center">
           {worker.firstName} {worker.lastName}
         </h4>
-        <p className="text-center fs-5">
+        <p className="text-center fs-5 mb-3">
           {worker.category} - {worker.subCategory}
         </p>
         <ul className="list-group list-group-unbordered mb-3">

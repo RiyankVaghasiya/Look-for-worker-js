@@ -17,15 +17,10 @@ function UserProfile() {
     phone: ''
   });
 
-  // const [userHistory, setUserHistory] = useState([]);  
+
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-
-  // States for the specific counters
-  // const [workersHired, setWorkersHired] = useState(0);
-  // const [tasksCompleted, setTasksCompleted] = useState(0);
-  // const [pendingRequests, setPendingRequests] = useState(0);
 
   useEffect(() => {
     // Fetch user data and hiring history from the API when the component mounts
@@ -36,10 +31,10 @@ function UserProfile() {
         console.log(userResponse.data.data.user);
 
         setUserDetails(userResponse.data.data.user);
-        setUserHistory(historyResponse.data);
-        setWorkersHired(userResponse.data.workersHired);
-        setTasksCompleted(userResponse.data.tasksCompleted);
-        setPendingRequests(userResponse.data.pendingRequests);
+        // setUserHistory(historyResponse.data);
+        // setWorkersHired(userResponse.data.workersHired);
+        // setTasksCompleted(userResponse.data.tasksCompleted);
+        // setPendingRequests(userResponse.data.pendingRequests);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -94,6 +89,27 @@ function UserProfile() {
       setUpdateLoading(false);
     }
   };
+  const [workerRequests, setWorkerRequests] = useState([]);
+
+  useEffect(() => {
+    const fetchWorkerStatus = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/v1/user/fetchHistory", { withCredentials: true });
+        console.log("API Response:", response.data); // Debugging log
+
+        if (Array.isArray(response.data?.data)) {
+          setWorkerRequests(response?.data?.data); // Extract 'data' array from response
+        } else {
+          setWorkerRequests([]); // Fallback to an empty array
+        }
+      } catch (error) {
+        console.error("Error fetching worker requests:", error);
+      }
+    };
+
+    fetchWorkerStatus();
+  }, []);
+
 
   if (loading) {
     return <div>Loading...</div>;
@@ -190,40 +206,35 @@ function UserProfile() {
             <tr>
               <th>Worker Name</th>
               <th>Category</th>
+              <th>Sub-Category</th>
               <th>Date</th>
               <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr
-            // key={index}
-            >
-              <td>0</td>
-              <td>cleaning</td>
-              <td>12/11/2023</td>
-              <td>
-                <span> Completed
-                </span>
-              </td>
-            </tr>
-
-          </tbody>
-          <tbody>
-
-
-            <tr
-            // key={index}
-            >
-              <td>John Doe</td>
-              <td>cleaning</td>
-              <td>12/11/2024</td>
-              <td>
-                <span >
-                  pending
-                </span>
-              </td>
-            </tr>
-
+            {workerRequests.length > 0 ? (
+              workerRequests.map((request, index) => (
+                <tr key={index}>
+                  <td>{request.worker?.firstName} {request.worker?.lastName}</td>
+                  <td>{request.worker?.category || "N/A"}</td>
+                  <td>{request.worker?.subCategory || "N/A"}</td>
+                  <td>{request.requestDate ? new Date(request.requestDate).toLocaleDateString() : "N/A"}</td>
+                  <td>
+                    <span className={
+                      request.status === "accepted" ? "text-success" :
+                        request.status === "rejected" ? "text-danger" :
+                          "text-warning"
+                    }>
+                      {request.status || "Pending"}
+                    </span>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className="text-center">No hiring history found</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

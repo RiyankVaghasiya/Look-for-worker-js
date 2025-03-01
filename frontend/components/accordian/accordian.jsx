@@ -3,19 +3,37 @@ import React, { useState } from "react";
 function Accordion({ handleApplyFilter }) {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [selectedCities, setSelectedCities] = useState([]);
-    const [selectedBudget, setSelectedBudget] = useState([]);
+    const [selectedhourlyPay, setSelectedhourlyPay] = useState([]);
+
+    const handleCategoryChange = (category) => {
+        setSelectedCategories((prev) =>
+            prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
+        );
+    };
+
+    const handleCityChange = (city) => {
+        setSelectedCities((prev) =>
+            prev.includes(city) ? prev.filter((c) => c !== city) : [...prev, city]
+        );
+    };
+    const handleHourlyPayChange = (hourlyPay) => {
+        setSelectedhourlyPay((prev) =>
+            prev.includes(hourlyPay) ? prev.filter((c) => c !== hourlyPay) : [...prev, hourlyPay]
+        );
+    };
 
     const handleApply = () => {
         handleApplyFilter({
             categories: selectedCategories,
             cities: selectedCities,
-            budget: selectedBudget,
+            hourlyPay: selectedhourlyPay,
         });
     };
 
+
     return (
         <div className="accordion" id="accordionExample">
-            {/* Categories Section */}
+
             <div className="accordion-item">
                 <h2 className="accordion-header" id="headingOne">
                     <button
@@ -41,11 +59,11 @@ function Accordion({ handleApplyFilter }) {
                                 <label>
                                     <input
                                         type="checkbox"
-                                        value="Cleaning"
+                                        value="cleaning"
                                         onChange={() =>
-                                            setSelectedCategories([...selectedCategories, "Cleaning"])
+                                            handleCategoryChange("cleaning")
                                         }
-                                    />{" "}
+                                    />
                                     Cleaning
                                 </label>
                             </li>
@@ -54,15 +72,12 @@ function Accordion({ handleApplyFilter }) {
                                 <label>
                                     <input
                                         type="checkbox"
-                                        value="Construction & Renovation"
+                                        value="Construction"
                                         onChange={() =>
-                                            setSelectedCategories([
-                                                ...selectedCategories,
-                                                "Construction & Renovation",
-                                            ])
+                                            handleCategoryChange("Construction")
                                         }
-                                    />{" "}
-                                    Construction & Renovation
+                                    />
+                                    Construction
                                 </label>
                             </li>
 
@@ -70,15 +85,12 @@ function Accordion({ handleApplyFilter }) {
                                 <label>
                                     <input
                                         type="checkbox"
-                                        value="Kitchen & Bathroom"
+                                        value="Bathroom service"
                                         onChange={() =>
-                                            setSelectedCategories([
-                                                ...selectedCategories,
-                                                "Kitchen & Bathroom",
-                                            ])
+                                            handleCategoryChange("Bathroom service")
                                         }
-                                    />{" "}
-                                    Kitchen & Bathroom
+                                    />
+                                    Bathroom Service
                                 </label>
                             </li>
 
@@ -86,14 +98,11 @@ function Accordion({ handleApplyFilter }) {
                                 <label>
                                     <input
                                         type="checkbox"
-                                        value="Carpentry"
+                                        value="carpentry"
                                         onChange={() =>
-                                            setSelectedCategories([
-                                                ...selectedCategories,
-                                                "Carpentry",
-                                            ])
+                                            handleCategoryChange("carpentry")
                                         }
-                                    />{" "}
+                                    />
                                     Carpentry
                                 </label>
                             </li>
@@ -102,11 +111,11 @@ function Accordion({ handleApplyFilter }) {
                                 <label>
                                     <input
                                         type="checkbox"
-                                        value="Washing"
+                                        value="automobiles"
                                         onChange={() =>
-                                            setSelectedCategories([...selectedCategories, "Washing"])
+                                            handleCategoryChange("automobiles")
                                         }
-                                    />{" "}
+                                    />
                                     Automobiles
                                 </label>
                             </li>
@@ -115,14 +124,11 @@ function Accordion({ handleApplyFilter }) {
                                 <label>
                                     <input
                                         type="checkbox"
-                                        value="Automobiles"
+                                        value="electricity"
                                         onChange={() =>
-                                            setSelectedCategories([
-                                                ...selectedCategories,
-                                                "Automobiles",
-                                            ])
+                                            handleCategoryChange("electricity")
                                         }
-                                    />{" "}
+                                    />
                                     Electricity
                                 </label>
                             </li>
@@ -131,15 +137,13 @@ function Accordion({ handleApplyFilter }) {
                                 <label>
                                     <input
                                         type="checkbox"
-                                        value="Doors & Windows service"
+                                        value="Doors service"
                                         onChange={() =>
-                                            setSelectedCategories([
-                                                ...selectedCategories,
-                                                "Doors & Windows service",
-                                            ])
+                                            handleCategoryChange("Doors service")
+
                                         }
-                                    />{" "}
-                                    Doors & Windows service
+                                    />
+                                    Doors service
                                 </label>
                             </li>
 
@@ -147,11 +151,12 @@ function Accordion({ handleApplyFilter }) {
                                 <label>
                                     <input
                                         type="checkbox"
-                                        value="Security"
+                                        value="security"
                                         onChange={() =>
-                                            setSelectedCategories([...selectedCategories, "Security"])
+                                            handleCategoryChange("security")
+
                                         }
-                                    />{" "}
+                                    />
                                     Security
                                 </label>
                             </li>
@@ -162,12 +167,9 @@ function Accordion({ handleApplyFilter }) {
                                         type="checkbox"
                                         value="Interior design"
                                         onChange={() =>
-                                            setSelectedCategories([
-                                                ...selectedCategories,
-                                                "Interior design",
-                                            ])
+                                            handleCategoryChange("Interior design")
                                         }
-                                    />{" "}
+                                    />
                                     Interior design
                                 </label>
                             </li>
@@ -178,10 +180,7 @@ function Accordion({ handleApplyFilter }) {
                                         type="checkbox"
                                         value="Roofing & Exterior painting"
                                         onChange={() =>
-                                            setSelectedCategories([
-                                                ...selectedCategories,
-                                                "Roofing & Exterior painting",
-                                            ])
+                                            handleCategoryChange("Roofing & Exterior painting")
                                         }
                                     />
                                     Roofing & Exterior painting
@@ -192,7 +191,6 @@ function Accordion({ handleApplyFilter }) {
                 </div>
             </div>
 
-            {/* Cities Section */}
             <div className="accordion-item">
                 <h2 className="accordion-header" id="headingTwo">
                     <button
@@ -218,11 +216,11 @@ function Accordion({ handleApplyFilter }) {
                                 <label>
                                     <input
                                         type="checkbox"
-                                        value="Surat"
+                                        value="surat"
                                         onChange={() =>
-                                            setSelectedCities([...selectedCities, "Surat"])
+                                            handleCityChange("surat")
                                         }
-                                    />{" "}
+                                    />
                                     Surat
                                 </label>
                             </li>
@@ -230,11 +228,11 @@ function Accordion({ handleApplyFilter }) {
                                 <label>
                                     <input
                                         type="checkbox"
-                                        value="Rajkot"
+                                        value="rajkot"
                                         onChange={() =>
-                                            setSelectedCities([...selectedCities, "Rajkot"])
+                                            handleCityChange("rajkot")
                                         }
-                                    />{" "}
+                                    />
                                     Rajkot
                                 </label>
                             </li>
@@ -242,11 +240,11 @@ function Accordion({ handleApplyFilter }) {
                                 <label>
                                     <input
                                         type="checkbox"
-                                        value="Bhavnagar"
+                                        value="bhavnagar"
                                         onChange={() =>
-                                            setSelectedCities([...selectedCities, "Bhavnagar"])
+                                            handleCityChange("bhavnagar")
                                         }
-                                    />{" "}
+                                    />
                                     Bhavnagar
                                 </label>
                             </li>
@@ -256,9 +254,9 @@ function Accordion({ handleApplyFilter }) {
                                         type="checkbox"
                                         value="ahemdabad"
                                         onChange={() =>
-                                            setSelectedCities([...selectedCities, "ahemdabad"])
+                                            handleCityChange("ahmedabad")
                                         }
-                                    />{" "}
+                                    />
                                     Ahemdabad
                                 </label>
                             </li>
@@ -266,11 +264,11 @@ function Accordion({ handleApplyFilter }) {
                                 <label>
                                     <input
                                         type="checkbox"
-                                        value="Vadodara"
+                                        value="vadodara"
                                         onChange={() =>
-                                            setSelectedCities([...selectedCities, "Vadodara"])
+                                            handleCityChange("vadodara")
                                         }
-                                    />{" "}
+                                    />
                                     Vadodara
                                 </label>
                             </li>
@@ -279,7 +277,6 @@ function Accordion({ handleApplyFilter }) {
                 </div>
             </div>
 
-            {/* Budget Section */}
             <div className="accordion-item">
                 <h2 className="accordion-header" id="headingThree">
                     <button
@@ -305,45 +302,46 @@ function Accordion({ handleApplyFilter }) {
                                 <label>
                                     <input
                                         type="checkbox"
-                                        value="100-300"
+                                        value="500"
                                         onChange={() =>
-                                            setSelectedBudget([...selectedBudget, "100-300"])
+                                            handleHourlyPayChange("500")
                                         }
-                                    />{" "}
-                                    Between 100 to 300
+                                    />
+                                    Up to 500
                                 </label>
+
                             </li>
                             <li>
                                 <label>
                                     <input
                                         type="checkbox"
-                                        value="400-700"
+                                        value="1000"
                                         onChange={() =>
-                                            setSelectedBudget([...selectedBudget, "400-700"])
+                                            handleHourlyPayChange("1000")
                                         }
-                                    />{" "}
-                                    Between 400 to 700
+                                    />
+                                    Up to 1000
                                 </label>
+
                             </li>
                             <li>
                                 <label>
                                     <input
                                         type="checkbox"
-                                        value="800-1000"
+                                        value="Above1000"
                                         onChange={() =>
-                                            setSelectedBudget([...selectedBudget, "800-1000"])
+                                            handleHourlyPayChange("Above1000")
                                         }
-                                    />{" "}
-                                    Between 800 to 1000
+                                    />
+                                    Above 1000
                                 </label>
+
                             </li>
-                            {/* Add more budget ranges as needed */}
                         </ul>
                     </div>
                 </div>
             </div>
 
-            {/* Apply Button */}
             <div class="d-flex justify-content-end">
                 <button className="apply-btn primary-btn m-2" onClick={handleApply}>
                     Apply

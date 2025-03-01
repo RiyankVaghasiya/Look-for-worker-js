@@ -308,7 +308,7 @@ const fetchRequests = asyncHandler(async (req, res) => {
   const worker = await Worker.findById(req.worker?._id)
     .populate({
       path: "requests.user",
-      select: "fullName email",
+      select: "fullName email phone address",
     })
     .select("-password");
 
@@ -351,6 +351,50 @@ const getWorkerDetailsById = asyncHandler(async (req, res) => {
     )
   );
 });
+
+const getFilteredWorkers = asyncHandler(async (req, res) => {
+  const { category, city, hourlyPay } = req.query;
+
+  let filter = {};
+
+  if (category) {
+    const categoryArray = category.split(","); // Convert string to array
+    filter.category = { $in: categoryArray }; // Use $in to match any category
+  }
+
+  // Handle multiple cities
+  if (city) {
+    const cityArray = city.split(","); // Convert string to array
+    filter.city = { $in: cityArray }; // Use $in to match any city
+  }
+
+  if (hourlyPay) {
+    const hourlyPayFilters = [];
+
+    if (hourlyPay.includes("500")) {
+      hourlyPayFilters.push({ hourlyPay: { $gte: 0, $lte: 500 } });
+    }
+    if (hourlyPay.includes("1000")) {
+      hourlyPayFilters.push({ hourlyPay: { $gte: 0, $lte: 1000 } });
+    }
+    if (hourlyPay.includes("Above1000")) {
+      hourlyPayFilters.push({ hourlyPay: { $gt: 1000 } });
+    }
+
+    if (hourlyPayFilters.length > 0) {
+      filter.$or = hourlyPayFilters;
+    }
+  }
+
+  const workers = await Worker.find(filter);
+
+  res.status(200).json(
+    new ApiResponse(200, {
+      workers,
+    })
+  );
+});
+
 // //when accesstoken expires frontend makes api request to create new accesstoken
 // const refreshAccessToken = asyncHandler(async (req, res) => {
 //   // first extract the refreshtoken of user from cookies
@@ -592,6 +636,7 @@ export {
   fetchRequests,
   getWorkers,
   getWorkerDetailsById,
+  getFilteredWorkers,
   // refreshAccessToken,
   // getCurrentUser,
   // updateUserAvatar,

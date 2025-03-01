@@ -124,9 +124,9 @@ function Navbar({ registrationFormRef }) {
               <li>
                 <Link to="/support" className="hover-links">Support</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/admin" className="hover-links">Admin</Link>
-              </li>
+              </li> */}
 
               {/* Show Sign In if not authenticated, otherwise show User Profile */}
               {isLoading ? (

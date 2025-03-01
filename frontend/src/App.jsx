@@ -14,8 +14,9 @@ import WorkerProfile from '../src/WorkerProfile-Login/WorkerProfileLogin.jsx';
 import Home from '../src/Home/Home';
 import WorkerProfilePage from "../src/Worker-Profile/Worker-Profile.jsx";
 import UserProfile from "../src/UserProfile/UserProfile.jsx"
-import FindWorker from '../src/FindWorker/FindWorker';
+import FindWorker from '../src/FindWorker/FindWorker.jsx';
 import TopBanner from '../components/TopBanner/TopBanner.jsx';
+import WorkerProfile02 from '../src/02WorkerProfile/WorkerProfile02.jsx';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import "../dist/css/adminlte.min.css";
 import './global.css';
@@ -66,10 +67,10 @@ function App() {
           path: "/support",
           element: <Support />,
         },
-        {
-          path: "/admin",
-          element: <Admin />,
-        },
+        // {
+        //   path: "/admin",
+        //   element: <Admin />,
+        // },
         {
           path: "/worker-profile",
           element: <WorkerProfilePage />, // Worker Profile Page
@@ -89,6 +90,10 @@ function App() {
         {
           path: "/signin",
           element: <SignIn />,
+        },
+        {
+          path: "/worker-profile02/:id",
+          element: <WorkerProfile02 />,
         },
       ],
     },

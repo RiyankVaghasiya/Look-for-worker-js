@@ -14,6 +14,7 @@ import {
   fetchRequests,
   getWorkers,
   getWorkerDetailsById,
+  getFilteredWorkers,
   // updateUserAvatar,
   // updateUserCoverImage,
 } from "../controllers/worker.controller.js";
@@ -34,6 +35,7 @@ workerRouter
   .post(verifyWorker, changeCurrentPassword);
 workerRouter.route("/fetchRequest").get(verifyWorker, fetchRequests);
 workerRouter.route("/getWorkers").get(getWorkers);
+workerRouter.route("/getFilteredWorkers").get(getFilteredWorkers);
 workerRouter.route("/:id").get(getWorkerDetailsById);
 
 //secured routes

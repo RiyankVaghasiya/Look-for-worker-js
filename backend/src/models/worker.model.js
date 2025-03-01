@@ -70,6 +70,10 @@ const WorkerSchema = new mongoose.Schema(
           enum: ["pending", "accepted", "rejected"],
           default: "pending",
         },
+        requestDate: {
+          type: Date,
+          default: () => new Date().setHours(0, 0, 0, 0), // Stores only the date
+        },
       },
     ],
   },

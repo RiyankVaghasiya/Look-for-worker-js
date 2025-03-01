@@ -35,6 +35,7 @@ import '../../src/Worker-Profile/Worker-profile.css';
 import Activity from '../../components/WorkerProfileComponents/workerProfileActivity.jsx';
 import Settings from '../../components/WorkerProfileComponents/workerProfileSettings.jsx';
 import ChangeEmailAndPassword from "./editCredentials.jsx";
+import Applicants from "./applicants.jsx";
 import "./workerProfileCss.css";
 
 import { Link, NavLink } from "react-router-dom";
@@ -69,14 +70,22 @@ const RightColumn = () => {
             Edit Credentials
           </button>
         </li>
+        <li className="nav-item">
+          <button
+            className={`nav-link ${activeTab === "applicants" ? "active" : ""}`}
+            onClick={() => setActiveTab("applicants")}
+          >
+            Applicants
+          </button>
+        </li>
       </ul>
       <hr />
       {activeTab === "activity" && <Activity />}
       {activeTab === "settings" && <Settings />}
       {activeTab === "editcredentials" && <ChangeEmailAndPassword />}
+      {activeTab === "applicants" && <Applicants />}
     </div>
   );
 };
 
 export default RightColumn;
-

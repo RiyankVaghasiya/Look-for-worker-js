@@ -45,7 +45,7 @@ const hireWorker = asyncHandler(async (req, res) => {
 const updateHireRequest = asyncHandler(async (req, res) => {
   const { userId, status } = req.body; // Status should be 'accepted' or 'rejected'
   const workerId = req.worker;
-  if (!["accepted", "rejected"].includes(status)) {
+  if (!["accepted", "rejected", "completed"].includes(status)) {
     return res.status(400).json({ success: false, message: "Invalid status" });
   }
 

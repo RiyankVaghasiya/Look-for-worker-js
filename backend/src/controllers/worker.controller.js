@@ -308,7 +308,7 @@ const fetchRequests = asyncHandler(async (req, res) => {
   const worker = await Worker.findById(req.worker?._id)
     .populate({
       path: "requests.user",
-      select: "fullName email phone address",
+      select: "fullName email phone address requests",
     })
     .select("-password");
 
@@ -336,8 +336,17 @@ const getWorkers = asyncHandler(async (req, res) => {
 const getWorkerDetailsById = asyncHandler(async (req, res) => {
   // get user data from frontend
 
-  const worker = await Worker.findById(req.params.id);
-  // const worker = await Worker.findById(req.body.id);
+  const workerId = req.params.id; // Get worker ID from route parameters
+
+  // Validate workerId before querying
+  if (!workerId || !workerId.match(/^[0-9a-fA-F]{24}$/)) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid worker ID format",
+    });
+  }
+  const worker = await Worker.findById(workerId);
+
   if (!worker) {
     throw new ApiError(404, "worker does not exist with this email");
   }

@@ -67,7 +67,7 @@ const WorkerSchema = new mongoose.Schema(
         user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
         status: {
           type: String,
-          enum: ["pending", "accepted", "rejected"],
+          enum: ["pending", "accepted", "rejected", "completed"],
           default: "pending",
         },
         requestDate: {

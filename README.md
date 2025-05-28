@@ -42,15 +42,19 @@
 
 ## 📸 Screenshots
 
-> _Add your own screenshots in a `screenshots/` folder and update paths here._
+## Home Page
+![Screenshot 2025-05-28 210739](https://github.com/user-attachments/assets/2ec6381b-f5d8-4737-83d1-64fd42cc0f3f)
 
-| Home Page | Find Worker Page |
-|-----------|------------------|
-| ![Home](screenshots/home.png) | ![FindWorker](screenshots/findworker.png) |
+## Find Worker Page
+![Screenshot 2025-05-28 211105](https://github.com/user-attachments/assets/8c7e18b0-a555-46ac-b6b2-1d89aab7d839)
 
-| Worker Profile | Register Popup |
-|----------------|----------------|
-| ![Worker Profile](screenshots/worker-profile.png) | ![Register](screenshots/register-popup.png) |
+
+## Worker Profile 
+![Screenshot 2025-05-28 211007](https://github.com/user-attachments/assets/d4531ee5-1421-42fb-a625-dce589b49808)
+
+## Register Form 
+ ![Screenshot 2025-05-28 210801](https://github.com/user-attachments/assets/fa921a95-12d1-4d74-9d71-26d29ecc2e69)
+
 
 ---
 
@@ -65,7 +69,6 @@ cd look-for-worker
 ### 2. Install Dependencies
 - cd backend
 - npm install
-
 - cd ../frontend
 - npm install
 
@@ -79,7 +82,8 @@ cd look-for-worker
 - CLOUDINARY_API_SECRET=your_api_secret
 
 ## 🧪 Running the App
- - ▶️ Start Backend
+
+- ▶️ Start Backend
 
 - cd backend
 - npm start

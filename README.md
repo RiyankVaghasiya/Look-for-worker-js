@@ -54,5 +54,14 @@
 
 ---
 
-## 📂 Project Structure
+## 🚀 Getting Started
 
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/look-for-worker.git
+cd look-for-worker
+
+### 2. Install Dependencies
+cd backend
+npm install

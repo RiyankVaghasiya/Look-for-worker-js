@@ -61,7 +61,32 @@
 ```bash
 git clone https://github.com/your-username/look-for-worker.git
 cd look-for-worker
-
+```
 ### 2. Install Dependencies
 cd backend
 npm install
+
+cd ../frontend
+npm install
+
+## 🔐 Set Up Environment Variables
+Create a .env file in the backend/ folder and add the following:
+
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+## 🧪 Running the App
+▶️ Start Backend
+
+cd backend
+npm start
+
+## ▶️ Start Frontend
+
+cd ../frontend
+npm start
+
